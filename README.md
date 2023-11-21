@@ -1,2 +1,2 @@
 # Gestore Prenotazioni
-SWE project repo of Prenotation-Manager program
+SWE project repo of the Prenotation-Manager program
