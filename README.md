@@ -2,7 +2,7 @@
 Facolta di Ingegneria\
 Corso di Laurea in Ingegneria Informatica**
 
-# Motivazione e Descrizione
+# Descrizione
 
 
 L’applicativo ha lo scopo di gestire le varie parti che compongono un sistema bibliotecario , dalla prenotazione dei libri a quella dei posti. Abbiamo individuato le due figure principali che si troveranno ad agire con il software:
