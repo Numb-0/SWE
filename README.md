@@ -1,6 +1,6 @@
-**UNIVERSITA’ DEGLI STUDI DI FIRENZE
-Facolta di Ingegneria
-Corso di Laurea in Ingegneria Informatica**
+**UNIVERSITA’ DEGLI STUDI DI FIRENZE**
+**Facolta di Ingegneria**
+**Corso di Laurea in Ingegneria Informatica**
 
 # Motivazione e Descrizione
 
