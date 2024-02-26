@@ -1,8 +1,0 @@
-/**
- * 
- */
-/**
- * 
- */
-module swe_project {
-}
