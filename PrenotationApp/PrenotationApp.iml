@@ -7,5 +7,28 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="file:///usr/share/java" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="file:///usr/share/java" />
+        </SOURCES>
+        <jarDirectory url="file:///usr/share/java" recursive="false" />
+        <jarDirectory url="file:///usr/share/java" recursive="false" type="SOURCES" />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="file:///usr/share/java/mariadb-jdbc" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+        <jarDirectory url="file:///usr/share/java/mariadb-jdbc" recursive="false" />
+      </library>
+    </orderEntry>
   </component>
 </module>
