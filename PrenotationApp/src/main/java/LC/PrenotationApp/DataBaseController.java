@@ -10,7 +10,7 @@ import java.sql.*;
  *6. process the results
  *7. close
  */
-public class DataBaseController {
+public abstract class DataBaseController {
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
         // Load the JDBC driver
         Class.forName("org.mariadb.jdbc.Driver");
