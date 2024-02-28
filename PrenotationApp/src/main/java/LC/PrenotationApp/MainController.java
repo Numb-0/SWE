@@ -32,4 +32,10 @@ public class MainController {
         // This returns a JSON or XML with the users
         return userRepository.findAll();
     }
+
+    @GetMapping(path="/delAll" )
+    public @ResponseBody void deleteAllUsers() {
+        // Deleting all users for testing
+        userRepository.deleteAll();
+    }
 }
