@@ -5,7 +5,7 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface testQuery extends CrudRepository<User, Long> {
 
-    List<User> findByLastName(String lastName);
+    List<User> findByUserName(String username);
 
     User findById(long id);
 }

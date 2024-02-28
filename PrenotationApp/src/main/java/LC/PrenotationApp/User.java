@@ -10,32 +10,40 @@ public class User {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
-    private String firstName;
-    private String lastName;
+    private String userName;
+    private String city;
 
     protected User() {}
 
-    public User(String firstName, String lastName) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public User(String userName, String city) {
+        this.userName = userName;
+        this.city = city;
     }
 
     @Override
     public String toString() {
         return String.format(
-                "Customer[id=%d, firstName='%s', lastName='%s']",
-                id, firstName, lastName);
+                "Customer[id=%d, userName='%s', city='%s']",
+                id, userName, city);
     }
 
     public Long getId() {
         return id;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getUserName() {
+        return userName;
     }
 
     public String getLastName() {
-        return lastName;
+        return city;
+    }
+
+    public void setUserName(String username) {
+        this.userName = username;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 }
