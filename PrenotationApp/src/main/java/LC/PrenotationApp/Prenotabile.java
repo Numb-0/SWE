@@ -6,21 +6,26 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-public class User {
+public class Prenotabile {
 
-    public enum Role {
-        user,
-        staff,
-        manger
+    public enum Type {
+        libro,
+        posto
     }
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
-    private String userName;
-    private String password;
-    private Role role;
+    private Type type;
+
+    private String autore;
+
+    private String genere;
+
+    private String plesso;
+
+    private boolean stato ;
 
 
-    protected User() {}
+    protected Prenotabile() {}
 }
