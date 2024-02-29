@@ -1,4 +1,4 @@
-package LC.PrenotationApp;
+package LC.PrenotationApp.Entities;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -6,7 +6,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-public class User {
+public class Utente {
 
     public enum Role {
         user,
@@ -22,5 +22,5 @@ public class User {
     private Role role;
 
 
-    protected User() {}
+    protected Utente() {}
 }

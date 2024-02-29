@@ -1,4 +1,4 @@
-package LC.PrenotationApp;
+package LC.PrenotationApp.Entities;
 
 import jakarta.persistence.*;
 
