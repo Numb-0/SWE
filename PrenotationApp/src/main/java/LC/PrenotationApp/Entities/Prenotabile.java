@@ -1,11 +1,11 @@
 package LC.PrenotationApp.Entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.Set;
 
 @Entity
+@Table(name= "Prenotabili")
 public class Prenotabile {
 
     public enum Type {
@@ -26,6 +26,11 @@ public class Prenotabile {
 
     private boolean stato ;
 
+    @OneToMany(mappedBy = "prenotabile", cascade = CascadeType.ALL)
+    private Set<Recensione> recensioni;
+
+    @OneToMany(mappedBy = "prenotabile", cascade = CascadeType.ALL)
+    private Set<Prenotazione> prenotazioni;
 
     protected Prenotabile() {}
 }

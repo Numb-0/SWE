@@ -10,9 +10,13 @@ public class Recensione {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
-    private Long idPrenotabile;
+    @ManyToOne
+    @JoinColumn(name = "Id_Prenotabile")
+    private Prenotabile prenotabile;
 
-    private Long idUtente;
+    @ManyToOne
+    @JoinColumn(name = "Id_Utente")
+    private Utente utente;
     private String recensione;
 
 
