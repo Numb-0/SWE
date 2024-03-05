@@ -1,12 +1,11 @@
-package LC.PrenotationApp;
+package LC.PrenotationApp.DAO;
 
+import LC.PrenotationApp.Entities.Recensione;
 import org.springframework.data.repository.CrudRepository;
-
-import LC.PrenotationApp.User;
 
 // This will be AUTO IMPLEMENTED by Spring into a Bean called userRepository
 // CRUD refers Create, Read, Update, Delete
 
-public interface UserRepository extends CrudRepository<User, Integer> {
+public interface RecensioniDao extends CrudRepository<Recensione, Integer> {
 
 }
