@@ -4,7 +4,7 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
-public class UserForm {
+public class UtentiForm {
     @NotNull
     @Size(min=4, max=30)
     private String username;
