@@ -1,6 +1,8 @@
 package LC.PrenotationApp;
 
 import java.sql.*;
+
+import LC.PrenotationApp.Controller.LoginController;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,5 +17,6 @@ import org.springframework.ui.Model;
 public class PrenotationApp {
 	public static void main(String[] args) {
 		SpringApplication.run(PrenotationApp.class, args);
+		LoginController loginController;
 	}
 }

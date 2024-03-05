@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import java.util.Set;
 
 @Entity
-@Table(name= "Utenti")
+@Table(name= "utenti")
 public class Utente {
 
     public enum Role {
@@ -17,7 +17,8 @@ public class Utente {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
-    private String userName;
+
+    private String username;
     private String password;
     private Role role;
     @OneToMany(mappedBy = "utente", cascade = CascadeType.ALL)
