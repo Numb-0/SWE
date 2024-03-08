@@ -6,7 +6,8 @@ import java.util.Set;
 
 @Entity
 @Table(name="Utenti")
-public class Utente {
+public class
+Utente {
     public enum Role {
         user,
         staff,
@@ -30,13 +31,18 @@ public class Utente {
         this.role = Role.user;
     }
 
-    void setUsername(String username) {
+    public void setUsername(String username) {
         this.username = username;
     }
-
-    void setPassword(String password) {
+    public void setPassword(String password) {
         this.password = password;
     }
+    public void setEmail(String email) { this.email = email; }
+
+    public String getUsername() { return this.username; }
+    public String getPassword() { return this.password; }
+    public String getEmail() {return this.email;}
+
     @OneToMany(mappedBy = "utente", cascade = CascadeType.ALL)
     private Set<Recensione> recensioni;
 
