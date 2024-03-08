@@ -23,12 +23,12 @@ Utente {
     @NotNull
     private String username;
     @NotNull
-    @Size(min = 3)
+    @Size(min = 3, max = 30)
     private String password;
 
     public Utente() {}
 
-    public Utente(String username, String password, String email) {
+    public Utente(String username, String password) {
         this.username = username;
         this.password = password;
         this.role = Role.user;
