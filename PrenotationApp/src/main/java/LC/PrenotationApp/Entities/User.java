@@ -47,8 +47,8 @@ User {
     public Role getRole() {return this.role;}
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private Set<Recensione> recensioni;
+    private Set<Review> reviews;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private Set<Prenotazione> prenotazioni;
+    private Set<Prenotation> prenotations;
 }

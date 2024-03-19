@@ -1,7 +1,7 @@
 package LC.PrenotationApp.Controller;
 
 import LC.PrenotationApp.Entities.User;
-import LC.PrenotationApp.DAO.UtentiDao;
+import LC.PrenotationApp.DAO.UserDao;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,7 +13,7 @@ import org.springframework.validation.BindingResult;
 @Controller
 public class LoginController{
     @Autowired
-    public UtentiDao utentiDao;
+    public UserDao userDao;
 
     // Nel GetMapping we show the page register and create an utente model
     @GetMapping("/register")
@@ -32,7 +32,7 @@ public class LoginController{
             return "register";
         }
         model.addAttribute("user", user);
-        utentiDao.save(user);
+        userDao.save(user);
         return "login_success";
     }
 
