@@ -33,7 +33,7 @@ public class LoginController{
         }
         model.addAttribute("user", user);
         userDao.save(user);
-        return "login_success";
+        return "register_success";
     }
 
 
@@ -46,11 +46,16 @@ public class LoginController{
     @PostMapping("/login")
     public String showLoginSuccess(@Valid User user, BindingResult bindingResult, Model model) {
         // get info and validate
+        model.addAttribute("user", user);
         //  access
-        if(bindingResult.hasErrors()){
+        User n = userDao.findByUsername(user.getUsername());
+        if(bindingResult.hasErrors() || n == null){
+            System.out.println("error");
             return "login";
         }
-        model.addAttribute("user", user);
+        else if (n.getPassword().equals(user.getPassword())){
+            return "login_success";
+        }
         return "login_success";
     }
 
