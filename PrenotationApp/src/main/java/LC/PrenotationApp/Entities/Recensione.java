@@ -16,7 +16,7 @@ public class Recensione {
 
     @ManyToOne
     @JoinColumn(name = "Id_Utente")
-    private Utente utente;
+    private User user;
     private String recensione;
 
 

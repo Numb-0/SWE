@@ -7,9 +7,9 @@ import jakarta.validation.constraints.Size;
 import java.util.Set;
 
 @Entity
-@Table(name="Utenti")
+@Table(name="Users")
 public class
-Utente {
+User {
     public enum Role {
         user,
         staff,
@@ -26,9 +26,9 @@ Utente {
     @Size(min = 3, max = 30)
     private String password;
 
-    public Utente() {}
+    public User() {}
 
-    public Utente(String username, String password) {
+    public User(String username, String password) {
         this.username = username;
         this.password = password;
         this.role = Role.user;
@@ -46,9 +46,9 @@ Utente {
     public String getPassword() { return this.password; }
     public Role getRole() {return this.role;}
 
-    @OneToMany(mappedBy = "utente", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private Set<Recensione> recensioni;
 
-    @OneToMany(mappedBy = "utente", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private Set<Prenotazione> prenotazioni;
 }

@@ -20,7 +20,7 @@ public class Prenotazione {
 
     @ManyToOne
     @JoinColumn(name = "Id_Utente")
-    private Utente utente;
+    private User user;
 
     protected Prenotazione() {}
 }
