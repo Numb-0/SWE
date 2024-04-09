@@ -8,8 +8,7 @@ import java.util.Set;
 
 @Entity
 @Table(name="Users")
-public class
-User {
+public class User {
     public enum Role {
         user,
         staff,
@@ -23,7 +22,7 @@ User {
     @NotNull
     private String username;
     @NotNull
-    @Size(min = 3, max = 30)
+    @Size(min = 3, max = 60)
     private String password;
 
     public User() {}
@@ -50,5 +49,5 @@ User {
     private Set<Review> reviews;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private Set<Prenotation> prenotations;
+    private Set<Reservation> reservations;
 }

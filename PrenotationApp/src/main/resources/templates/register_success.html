@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html lang="en" data-bs-theme="dark" xmlns:th="https://www.thymeleaf.org" 
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{/fragments/layouts/base_layout}">
+      layout:decorate="~{/fragments/layouts/base_layout}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head> 
     <title>Testing Http Response</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -10,7 +10,6 @@
     <section layout:fragment="content">
         <h1>Sign-Up Done</h1>
         <p th:text="'UserLogged: ' + ${user.username}"/>
-        <p th:text="'pass: ' + ${user.password}"/>
     </section>
 </body>
 </html>

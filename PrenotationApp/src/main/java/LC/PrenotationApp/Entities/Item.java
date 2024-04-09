@@ -30,7 +30,7 @@ public class Item {
     private Set<Review> reviews;
 
     @OneToMany(mappedBy = "item", cascade = CascadeType.ALL)
-    private Set<Prenotation> prenotations;
+    private Set<Reservation> reservations;
 
     protected Item() {}
 }

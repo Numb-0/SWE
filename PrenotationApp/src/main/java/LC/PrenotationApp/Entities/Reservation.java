@@ -3,8 +3,8 @@ package LC.PrenotationApp.Entities;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name= "Prenotations")
-public class Prenotation {
+@Table(name= "Reservations")
+public class Reservation {
 
 
     @Id
@@ -22,5 +22,5 @@ public class Prenotation {
     @JoinColumn(name = "Id_User")
     private User user;
 
-    protected Prenotation() {}
+    protected Reservation() {}
 }

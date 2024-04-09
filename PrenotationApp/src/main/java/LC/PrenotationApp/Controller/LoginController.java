@@ -2,6 +2,7 @@ package LC.PrenotationApp.Controller;
 
 import LC.PrenotationApp.Entities.User;
 import LC.PrenotationApp.DAO.UserDao;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +15,8 @@ import org.springframework.validation.BindingResult;
 public class LoginController{
     @Autowired
     public UserDao userDao;
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
 
     // Nel GetMapping we show the page register and create an utente model
     @GetMapping("/register")
@@ -27,11 +30,17 @@ public class LoginController{
 
     @PostMapping("/register")
     public String showRegisterSuccess(@Valid User user, BindingResult bindingResult, Model model) {
-        // also needs to check is user already in db
         if(bindingResult.hasErrors()){
             return "register";
         }
+        User existingUser = userDao.findByUsername(user.getUsername());
+        if (existingUser != null) {
+            // User already exists, return to register page with error
+            bindingResult.rejectValue("username", "error.user", "Username is already taken");
+            return "register";
+        }
         model.addAttribute("user", user);
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         userDao.save(user);
         return "register_success";
     }
@@ -44,18 +53,17 @@ public class LoginController{
     }
 
     @PostMapping("/login")
-    public String showLoginSuccess(@Valid User user, BindingResult bindingResult, Model model) {
-        // get info and validate
-        model.addAttribute("user", user);
-        //  access
-        User n = userDao.findByUsername(user.getUsername());
-        if(bindingResult.hasErrors() || n == null){
-            System.out.println("error");
+    public String login(@Valid User user, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
             return "login";
         }
-        else if (n.getPassword().equals(user.getPassword())){
-            return "login_success";
+        User existingUser = userDao.findByUsername(user.getUsername());
+        if (existingUser == null || !passwordEncoder.matches(user.getPassword(), existingUser.getPassword())) {
+            // User does not exist or password does not match, return to login page with error
+            bindingResult.rejectValue("username", "error.user", "Invalid username or password");
+            return "login";
         }
+        // Password matches, login successful
         return "login_success";
     }
 
