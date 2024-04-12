@@ -19,7 +19,7 @@ public class User {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
     private Role role;
-    @NotNull
+    @Column(nullable = false, unique = true)
     private String username;
     @NotNull
     @Size(min = 3, max = 60)

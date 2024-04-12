@@ -9,23 +9,21 @@
     <body>
         <header>
             <div class="container-fluid mt-2">
-              <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+              <div class="d-flex flex-wrap align-items-left justify-content-center justify-content-lg-start">
+                
                 <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
-                  <img class="mb-2" src="../static/Books&Shelf.svg" th:src="@{/Books&Shelf.svg}" alt="" width="40" height="40">
+                  <img class="mb-2" src="../static/images/Books&Shelf.svg" th:src="@{/images/Books&Shelf.svg}" alt="" width="40" height="40">
                 </a>
       
                 <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                  <li><a th:href="@{/}" class="nav-link px-2 text-secondary">Home</a></li>
+                  <li><a th:href="@{/}" class="nav-link px-2 text-secondary fw-bold fs-4">Home</a></li>
+                  <li><a th:href="@{/dashboard}" class="nav-link px-2 text-secondary fw-bold fs-4">DashBoard</a></li>
                 </ul>
       
-                <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
-                  <input type="search" class="form-control form-control-dark text-bg-dark" placeholder="Search..." aria-label="Search">
-                </form>
-      
-                <div class="text-end">
+                <!-- <div class="text-end">
                   <button id="login_link_button" type="button" class="btn btn-outline-light me-2" th:onclick="window.location.href = '/login'">Login</button>
                   <button id="register_link_button" type="button" class="btn btn-warning" th:onclick="window.location.href = '/register'">Sign-up</button>
-                </div>
+                </div> -->
               </div>
             </div>
           </header>
