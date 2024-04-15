@@ -1,5 +1,6 @@
 package LC.PrenotationApp;
 
+import LC.PrenotationApp.BuisnessLogic.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -7,8 +8,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configurers.AbstractAuthenticationFilterConfigurer;
-import org.springframework.security.config.annotation.web.configurers.LogoutConfigurer;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -40,7 +39,8 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/", "/register","/index", "/images/**", "/styles/**" ).permitAll() // allow unauthenticated access to index and register pages
+                        .requestMatchers("/", "/register","/index", "/images/**", "/styles/**", "/scripts/**" ).permitAll() // allow unauthenticated access to index and register pages
+                        .requestMatchers("/user-dashboard").hasRole("USER")
                         .anyRequest().authenticated())
                 .formLogin(form -> form
                     .loginPage("/login").defaultSuccessUrl("/", false)
