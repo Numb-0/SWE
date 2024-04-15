@@ -13,7 +13,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-// This class contains all the useful methods for the controller to use
+// This class contains all the useful methods for the controllers to use
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
     @Autowired
@@ -48,4 +48,5 @@ public class CustomUserDetailsService implements UserDetailsService {
         }
         return null;
     }
+
 }

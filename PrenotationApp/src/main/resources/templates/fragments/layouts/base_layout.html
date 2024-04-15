@@ -17,14 +17,15 @@
                   <img class="mb-2" src="../static/images/Books&Shelf.svg" th:src="@{/images/Books&Shelf.svg}" alt="" width="40" height="40">
                 </a>
       
-                <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                <ul class="nav nav-underline col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
                   <li><a th:href="@{/}" class="nav-link px-2 text-secondary fw-bold fs-4">Home</a></li>
                   <li><a th:href="@{/dashboard}" class="nav-link px-2 text-secondary fw-bold fs-4">DashBoard</a></li>
                   <!--th:if here is used to show the register link when in index page-->
-                  <li><a th:if="${isIndexPage && !isUserLogged}" th:href="@{/register}" class="nav-link px-2 text-secondary fw-bold fs-4">Register</a></li>
                 </ul>
 
-                <ul>
+                <ul class="nav nav-underline col-12 col-lg-auto mb-2 justify-content-center mb-md-0">
+                  <li class="ms-auto" th:if="${isIndexPage && !isUserLogged}"><a th:href="@{/register}" class="nav-link px-2 text-secondary fw-bold fs-4">Register</a></li>
+                  <li class="ms-auto" th:if="${isUserLogged}"><p th:text="${AuthUser.getRole() + ' | ' + AuthUser.username}" class="nav-link px-2 user-name fw-bold fs-4"></p></li>
                 </ul>
       
                 <!-- <div class="text-end">

@@ -51,4 +51,15 @@ public class CustomUserDetails implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
+    // Utility methods to get role
+    public String capitalizeFirstLetter(String original) {
+        if (original == null || original.isEmpty()) {
+            return original;
+        }
+        return original.substring(0, 1).toUpperCase() + original.substring(1).toLowerCase();
+    }
+    public String getRole() {
+        return capitalizeFirstLetter(user.getRole().name());
+    }
 }

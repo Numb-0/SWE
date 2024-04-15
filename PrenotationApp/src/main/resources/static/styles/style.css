@@ -8,4 +8,12 @@
     padding: 1rem;
   }
 
-  
+  .user-name {
+    text-decoration-color: gold;
+    color: gold;
+  }
+
+  .user-name:hover {
+    color: yellow;
+    text-decoration-color: yellow;
+}
