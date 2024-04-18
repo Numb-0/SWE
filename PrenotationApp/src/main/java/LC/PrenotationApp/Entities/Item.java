@@ -9,8 +9,8 @@ import java.util.Set;
 public class Item {
 
     public enum Type {
-        libro,
-        posto
+        book,
+        seats,
     }
 
     @Id

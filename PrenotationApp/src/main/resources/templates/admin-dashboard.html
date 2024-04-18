@@ -6,10 +6,37 @@
     <title>DashBoard</title>
   </head>
   <body>
-    <section layout:fragment="content">
-      <div class="container">
-        <h1>Admin Dashboard</h1>
-        <p>Welcome to the admin dashboard</p>
+    <section layout:fragment="content" class="admin-dashboard">
+      <h1>Admin Dashboard</h1>
+      <p>Welcome to the admin dashboard</p>
+      <div class="btn-group">
+        <div class="dropdown">
+          <button type="button" class="btn btn-secondary dropdown-toggle" role="button" data-bs-toggle="dropdown">Books</button>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#bookModal">Action</a></li>
+              <li><a class="dropdown-item" href="#">Another action</a></li>
+              <li><a class="dropdown-item" href="#">Something else here</a></li>
+            </ul>        
+        </div>
+        <button type="button" class="btn btn-outline-primary">ClassRoom Reservations</button>
+      </div>
+      <!-- Modal -->
+      <div class="modal fade" id="bookModal" tabindex="-1" aria-labelledby="bookModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="bookModalLabel">Manage Books</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <!-- Add your form to add, remove, edit books here -->
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   </body>

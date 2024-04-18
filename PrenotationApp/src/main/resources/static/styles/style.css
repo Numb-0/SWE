@@ -8,12 +8,18 @@
     padding: 1rem;
   }
 
-  .user-name {
-    text-decoration-color: gold;
-    color: gold;
-  }
+.user-name {
+  text-decoration-color: gold;
+  color: gold;
+}
 
-  .user-name:hover {
-    color: yellow;
-    text-decoration-color: yellow;
+.user-name:hover {
+  color: yellow;
+  text-decoration-color: yellow;
+}
+
+.admin-dashboard {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }

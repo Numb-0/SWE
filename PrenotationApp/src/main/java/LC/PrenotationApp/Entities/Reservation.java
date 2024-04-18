@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 @Table(name= "Reservations")
 public class Reservation {
 
-
+    protected Reservation() {}
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
@@ -21,6 +21,4 @@ public class Reservation {
     @ManyToOne
     @JoinColumn(name = "Id_User")
     private User user;
-
-    protected Reservation() {}
 }

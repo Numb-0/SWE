@@ -39,7 +39,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/", "/register","/index", "/images/**", "/styles/**", "/scripts/**" ).permitAll() // allow unauthenticated access to index and register pages
+                        .requestMatchers("/", "/register","/index", "/images/**", "/styles/**", "/scripts/**" ).permitAll() // allow unauthenticated access to pages
                         .requestMatchers("/user-dashboard").hasRole("USER")
                         .requestMatchers("/admin-dashboard").hasRole("ADMIN")
                         .anyRequest().authenticated())
