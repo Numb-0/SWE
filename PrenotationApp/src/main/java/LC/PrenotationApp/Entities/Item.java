@@ -7,6 +7,13 @@ import java.util.Set;
 @Entity
 @Table(name= "Items")
 public class Item {
+    public Item() {
+    }
+    public Item(Item.Type type) {
+        // Are attributes already NULL?
+        this.type = type;
+        this.state = false; // Not reserved
+    }
 
     public enum Type {
         book,
@@ -24,7 +31,7 @@ public class Item {
 
     private String complex;
 
-    private boolean state ;
+    private boolean state;
 
     @OneToMany(mappedBy = "item", cascade = CascadeType.ALL)
     private Set<Review> reviews;
@@ -32,5 +39,18 @@ public class Item {
     @OneToMany(mappedBy = "item", cascade = CascadeType.ALL)
     private Set<Reservation> reservations;
 
-    protected Item() {}
+    public String getAuthor() {
+        return this.author;
+    }
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public String getGenre() {
+        return this.genre;
+    }
+
+    public void setGenre(String genre){
+        this.genre = genre;
+    }
 }

@@ -1,6 +1,7 @@
 package LC.PrenotationApp.Controller;
 
 import LC.PrenotationApp.BuisnessLogic.CustomUserDetailsService;
+import LC.PrenotationApp.BuisnessLogic.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -12,6 +13,9 @@ public class DefaultModelAttributeAdvice {
 
     @Autowired
     CustomUserDetailsService userDetailsService;
+
+    @Autowired
+    ItemService itemService;
 
     @ModelAttribute("isIndexPage")
     public boolean isIndexPage() {

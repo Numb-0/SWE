@@ -25,25 +25,25 @@
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="bookModalLabel">A</h5>
+              <h5 class="modal-title" id="bookModalLabel">Add Book</h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-              <select class="form-select" aria-label="Genre">
-                <option value="1">Romance</option>
-                <option value="2">Adventure</option>
-                <option value="3">Fantasy</option>
-              </select>
-              <div class="mb-3">
-                <label for="Author-name" class="form-label">Email address</label>
-                <input type="text" class="form-control" id="Author-name" placeholder="Author">
-              </div>
+              <form id="book-add" action="#" th:action="@{/dashboard-add}" method="post" th:object="${book}">
+                <select class="form-select" aria-label="Genre" th:field="*{genre}">
+                  <option th:value="Romance" value="1">Romance</option>
+                  <option th:value="Adventure" value="2">Adventure</option>
+                  <option th:value="Fantasy" value="3">Fantasy</option>
+                </select>
+                <div class="mb-3">
+                  <input type="text" class="form-control" id="Author-name" th:field="*{author}" placeholder="Author">
+                </div>
               
-
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Add Book</button>
+              <button id="book-add-close" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Add Book</button>
             </div>
+          </form>
           </div>
         </div>
       </div>
