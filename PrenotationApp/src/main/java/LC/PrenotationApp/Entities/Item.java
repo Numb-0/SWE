@@ -9,6 +9,7 @@ import java.util.Set;
 public class Item {
     public Item() {
     }
+
     public Item(Item.Type type) {
         // Are attributes already NULL?
         this.type = type;
@@ -21,10 +22,10 @@ public class Item {
     }
 
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private Type type;
-
+    private String name;
     private String author;
 
     private String genre;
@@ -39,6 +40,20 @@ public class Item {
     @OneToMany(mappedBy = "item", cascade = CascadeType.ALL)
     private Set<Reservation> reservations;
 
+    public Long getId() {
+        return this.id;
+    }
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
     public String getAuthor() {
         return this.author;
     }
@@ -53,4 +68,5 @@ public class Item {
     public void setGenre(String genre){
         this.genre = genre;
     }
+
 }
