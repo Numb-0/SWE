@@ -37,8 +37,14 @@
                     <td th:text="${item.author}"></td>
                     <td th:text="${item.genre}"></td>
                     <td>
-                        <input type="hidden" id="item-id" th:value="${item.id}" />
-                        <button id="book-update-button" data-bs-toggle="modal" data-bs-target="#book-edit-modal" class="btn btn-primary">Edit</button>
+                      <div class="btn-edit">
+                        <input class="item-input" type="hidden" id="item-id" th:value="${item.id}" />
+                        <button  data-bs-toggle="modal" data-bs-target="#book-edit-modal" class="edit-button btn btn-primary">Edit</button>
+                      </div>
+                      <div class="btn-delete">
+                        <input class="item-input" type="hidden" id="item-id" th:value="${item.id}" />
+                        <button class="delete-button btn btn-danger">Delete</button>
+                      </div>
                     </td>
                     <!-- Add more data cells as needed -->
                 </tr>
@@ -100,7 +106,8 @@
             <div class="modal-body">
                 <form id="book-edit-form" action="#" th:action="@{/dashboard-book-edit/{id}(id=${bookUpdate.id})}" method="put" th:object="${bookUpdate}">
                   <div class="mb-3">
-                    <input type="text" class="form-control" th:field="*{name}" placeholder="Title">
+                    <label>Title</label>
+                    <input type="text" class="book-edit-input form-control" th:field="*{name}" placeholder="Title">
                   </div>
                   <select class="form-select" aria-label="Genre" th:field="*{genre}">
                     <option th:value="Romance" th:selected="${bookUpdate.genre == 'Romance'}">Romance</option>
@@ -108,7 +115,8 @@
                     <option th:value="Fantasy" th:selected="${bookUpdate.genre == 'Fantasy'}">Fantasy</option>
                   </select>
                   <div class="mb-3">
-                    <input type="text" class="form-control" th:field="*{author}" placeholder="Author">
+                    <label>Author</label>
+                    <input type="text" class="book-edit-input form-control" th:field="*{author}" placeholder="Author">
                   </div>
                   <div class="modal-footer">
                     <button id="book-edit-close-btn" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -119,7 +127,7 @@
           </div>
         </div> 
       </div>
-
+      <!-- Book-edit Modal -->
     </section>
   </body>
 </html>

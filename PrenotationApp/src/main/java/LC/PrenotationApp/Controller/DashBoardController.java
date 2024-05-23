@@ -5,6 +5,7 @@ import LC.PrenotationApp.BuisnessLogic.ItemService;
 import LC.PrenotationApp.Entities.Item;
 import LC.PrenotationApp.Entities.User;
 
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.Null;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +14,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -60,12 +62,20 @@ public class DashBoardController {
 
     @PostMapping("/dashboard-book-edit/{id}")
     @ResponseBody
-    public ResponseEntity<String> editBook(@PathVariable("id") long id, @ModelAttribute("bookUpdate") Item bookUpdate) {
-        Item item = itemService.getItemById(id);
-        if (item == null) {
-            throw new IllegalArgumentException("Invalid item Id:" + id);
+    public ResponseEntity<String> editBook(@PathVariable("id") Long id, @Valid @ModelAttribute("bookUpdate") Item bookUpdate, BindingResult bindingResult) {
+        // If there are errors pass them to the javascript
+        if (bindingResult.hasErrors()) {
+            return ResponseEntity.badRequest().body("Invalid item data");
         }
-        itemService.updateItemById(id, bookUpdate);
+        // Updates Item book Data
+        itemService.updateBookItemById(id, bookUpdate);
         return ResponseEntity.ok("Book updated successfully");
+    }
+
+    @PostMapping("/dashboard-book-delete/{id}")
+    @ResponseBody
+    public  ResponseEntity<String> removeBook(@PathVariable("id") Long id) {
+        itemService.removeBookItemById(id);
+        return ResponseEntity.ok("Book removed successfully");
     }
 }

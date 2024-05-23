@@ -25,14 +25,19 @@ public class ItemService {
         return itemDao.findById(id);
     }
 
-    public void updateItemById(long id, Item updatedItem) {
+    public void updateBookItemById(long id, Item updatedItem) {
         Item item = itemDao.findById(id);
         if (item == null) {
             throw new IllegalArgumentException("Invalid item Id:" + id);
         }
+
         item.setName(updatedItem.getName());
         item.setAuthor(updatedItem.getAuthor());
         item.setGenre(updatedItem.getGenre());
         itemDao.save(item);
+    }
+
+    public void removeBookItemById(Long id) {
+        itemDao.deleteById(Math.toIntExact(id));
     }
 }

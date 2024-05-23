@@ -1,6 +1,7 @@
 // Jquery Script
 // This script is used to handle the form submission of the add book form
 // Without this script, the form submission would cause a page reload
+// Using ajax we can capture the requests to the server and hadle using only js 
 
 // Add book form submission
 $(document).ready(function() {
@@ -21,6 +22,8 @@ $(document).ready(function() {
                 $('#book-add-close-btn').click();
                 // Reset form on success submission
                 $('#book-add-form').trigger('reset');
+                // Refresh the page on success
+                location.reload();
             },
             error: function(response) {
                 // Handle error
@@ -35,6 +38,7 @@ $(document).ready(function() {
     $('#book-edit-form').on('submit', function(e) {
         e.preventDefault();
 
+        // This gets the attribute of the form action
         var url = $(this).attr('action');
         var formData = $(this).serialize();
 
@@ -53,15 +57,30 @@ $(document).ready(function() {
             error: function(error) {
                 // handle error
                 console.log(error);
+                // This makes the input form become red
+                Array.from(document.getElementsByClassName("book-edit-input")).forEach(input => {
+                    input.classList.add("is-invalid");
+                })
             }
         });
     });
 });
 
-// Javascript code to change the action attribute of the edit form 
+
+// Javascript code to change the action(link) attribute of the edit form 
 // During runtime!!!
-document.getElementById('book-update-button').addEventListener('click', function(event) {
-    var id = document.getElementById('item-id').value;
-    document.getElementById('book-edit-form').action = '/dashboard-book-edit/' + id;
+Array.from(document.getElementsByClassName("edit-button")).forEach(element => {
+    element.addEventListener('click', function(event) {
+        var input = this.parentElement.querySelector('.item-input');
+        var id = input.value;
+        document.getElementById('book-edit-form').action = '/dashboard-book-edit/' + id;
+    });
 });
 
+
+document.getElementById('book-edit-modal').addEventListener('hidden.bs.modal', function (event) {
+    // Remove the class from each input when the modal closes.
+    Array.from(document.getElementsByClassName("book-edit-input")).forEach(input => {
+        input.classList.remove("is-invalid");
+    });
+});

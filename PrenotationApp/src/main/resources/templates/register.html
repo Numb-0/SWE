@@ -12,12 +12,10 @@
       <form action="#" th:action="@{/register}" th:object="${user}" method="post">
         <img class="mb-4" src="../static/images/Books&Shelf.svg" th:src="@{images/Books&Shelf.svg}" alt="" width="100" height="100">
         <h1 class="h3 mb-3 fw-normal">Please register</h1>
-
         <div class="form-floating">
           <input type="text" class="form-control" id="floatingUsername" placeholder="Username" th:field="*{username}">
-          <label th:if="${#fields.hasErrors('username')}" th:errors="*{username}" for="floatingInput">Username</label>
+          <label th:if="${#fields.hasErrors('username')}" th:errors="*{username}" for="floatingUsername">Username</label>
         </div>
-
         <div class="form-floating">
           <input type="password" class="form-control" id="floatingPassword" placeholder="Password" th:field="*{password}">
           <label th:if="${#fields.hasErrors('password')}" th:errors="*{password}" for="floatingPassword">Password</label>

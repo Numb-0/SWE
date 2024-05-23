@@ -1,6 +1,8 @@
 package LC.PrenotationApp.Entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
 import java.util.Set;
 
@@ -25,6 +27,7 @@ public class Item {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private Type type;
+    @NotEmpty(message = "name cant be empty")
     private String name;
     private String author;
 
@@ -46,7 +49,6 @@ public class Item {
     public void setId(long id) {
         this.id = id;
     }
-
     public String getName() {
         return this.name;
     }
