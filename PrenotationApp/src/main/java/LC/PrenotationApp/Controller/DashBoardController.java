@@ -8,6 +8,7 @@ import LC.PrenotationApp.Entities.User;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Null;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -72,10 +73,16 @@ public class DashBoardController {
         return ResponseEntity.ok("Book updated successfully");
     }
 
-    @PostMapping("/dashboard-book-delete/{id}")
+    @DeleteMapping("/dashboard-book-delete/{id}")
     @ResponseBody
     public  ResponseEntity<String> removeBook(@PathVariable("id") Long id) {
-        itemService.removeBookItemById(id);
-        return ResponseEntity.ok("Book removed successfully");
+        try {
+            // Delete the book
+            itemService.removeBookItemById(id);
+            return ResponseEntity.ok("Book deleted successfully");
+        } catch (Exception e) {
+            // Handle the exception as you see fit
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error deleting the book");
+        }
     }
 }
