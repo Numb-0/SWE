@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark" xmlns:th="https://www.thymeleaf.org" 
+      layout:decorate="~{/fragments/layouts/base_layout}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+  <head>
+    <title>DashBoard</title>
+  </head>
+  <body>
+    <section layout:fragment="content">
+      <div class="admin-dashboard">
+        <h1>Admin Dashboard</h1>
+        <p>Welcome to the admin dashboard</p>
+        <div class="btn-group">
+          <div class="dropdown">
+            <button type="button" class="btn btn-secondary dropdown-toggle" role="button" data-bs-toggle="dropdown">Books</button>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#book-add-modal">Add</a></li>
+              </ul>        
+          </div>
+          <button type="button" class="btn btn-outline-primary">ClassRoom Reservations</button>
+        </div>
+      </div>
+      <div class="container">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Genre</th>
+                    <th>Actions</th>
+                    <!-- Add more columns as needed -->
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="item : ${books}">
+                    <td th:text="${item.name}"></td>
+                    <td th:text="${item.author}"></td>
+                    <td th:text="${item.genre}"></td>
+                    <td>
+                      <div class="btn-edit">
+                        <input class="item-input" type="hidden" id="item-id" th:value="${item.id}" />
+                        <button  data-bs-toggle="modal" data-bs-target="#book-edit-modal" class="edit-button btn btn-primary">Edit</button>
+                      </div>
+                      <div class="btn-delete">
+                        <input class="item-input" type="hidden" id="item-id" th:value="${item.id}" />
+                        <button class="delete-button btn btn-danger">Delete</button>
+                      </div>
+                    </td>
+                    <!-- Add more data cells as needed -->
+                </tr>
+            </tbody>
+        </table>
+    </div>
+      <!-- Toast -->
+      <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div id="book-toast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+          <div class="toast-header">
+            <img class="rounded me-2">
+            <strong class="me-auto">Bootstrap</strong>
+            <small>11 mins ago</small>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+          </div>
+          <div class="toast-body">
+            Hello, world! This is a toast message.
+          </div>
+        </div>
+      </div>     
+      <!-- Book-add Modal -->
+      <div class="modal fade" id="book-add-modal" tabindex="-1" aria-labelledby="book-add-modal-label" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="book-add-modal-label">Add Book</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form id="book-add-form" action="#" th:action="@{/dashboard-book-add}" method="post" th:object="${book}">
+                <div class="mb-3">
+                  <input type="text" class="form-control" id="book-title" th:field="*{name}" placeholder="Title">
+                </div>
+                <select class="form-select" aria-label="Genre" th:field="*{genre}">
+                  <option th:value="Romance" value="1">Romance</option>
+                  <option th:value="Adventure" value="2">Adventure</option>
+                  <option th:value="Fantasy" value="3">Fantasy</option>
+                </select>
+                <div class="mb-3">
+                  <input type="text" class="form-control" id="book-author" th:field="*{author}" placeholder="Author">
+                </div>
+                <div class="modal-footer">
+                  <button id="book-add-close-btn" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button id="book-add-btn" type="submit" class="btn btn-primary">Add Book</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div> 
+      </div>
+      <!-- Book-edit Modal -->
+      <div class="modal fade" id="book-edit-modal" tabindex="-1" aria-labelledby="book-edit-modal-label" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="book-edit-modal-label">Edit Book</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="book-edit-form" action="#" th:action="@{/dashboard-book-edit/{id}(id=${bookUpdate.id})}" method="put" th:object="${bookUpdate}">
+                  <div class="mb-3">
+                    <label>Title</label>
+                    <input type="text" class="book-edit-input form-control" th:field="*{name}" placeholder="Title">
+                  </div>
+                  <select class="form-select" aria-label="Genre" th:field="*{genre}">
+                    <option th:value="Romance" th:selected="${bookUpdate.genre == 'Romance'}">Romance</option>
+                    <option th:value="Adventure" th:selected="${bookUpdate.genre == 'Adventure'}">Adventure</option>
+                    <option th:value="Fantasy" th:selected="${bookUpdate.genre == 'Fantasy'}">Fantasy</option>
+                  </select>
+                  <div class="mb-3">
+                    <label>Author</label>
+                    <input type="text" class="book-edit-input form-control" th:field="*{author}" placeholder="Author">
+                  </div>
+                  <div class="modal-footer">
+                    <button id="book-edit-close-btn" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button id="book-edit-btn" type="submit" class="btn btn-primary">Edit Book</button>
+                  </div>
+                </form>
+            </div>
+          </div>
+        </div> 
+      </div>
+      <!-- Book-edit Modal -->
+    </section>
+  </body>
+</html>
