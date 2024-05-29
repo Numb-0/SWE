@@ -2,12 +2,13 @@ package LC.PrenotationApp.Controller;
 
 import LC.PrenotationApp.BuisnessLogic.CustomUserDetailsService;
 import LC.PrenotationApp.BuisnessLogic.ItemService;
+import LC.PrenotationApp.Entities.Item;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
-// This class sets default attributes for all the controllers model
+// This class sets default attributes for all thDefaultModelAttributeAdvicee controllers model
 @ControllerAdvice
 public class DefaultModelAttributeAdvice {
 

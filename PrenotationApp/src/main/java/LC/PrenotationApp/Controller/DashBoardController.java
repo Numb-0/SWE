@@ -15,33 +15,14 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 public class DashBoardController {
     @Autowired
     ItemService itemService;
-
-    @GetMapping("/dashboard")
-    public String showDashBoard(Model model){
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        List<Item> bookList = itemService.getBookItems();
-        model.addAttribute("books", bookList);
-        for (GrantedAuthority authority : auth.getAuthorities()) {
-            String userRole = authority.getAuthority();
-            if (userRole.equals("ROLE_USER")) {
-               return "user-dashboard";
-            } else if (userRole.equals("ROLE_ADMIN")) {
-                return "admin-dashboard";
-            }
-            // TODO
-        }
-        return "dashboard";
-    }
 
     @ModelAttribute("book")
     public Item book (){
@@ -53,36 +34,22 @@ public class DashBoardController {
         return new Item(Item.Type.book);
     }
 
-    // Calling this creates a newBook
-    @PostMapping("/dashboard-book-add")
-    @ResponseBody
-    public ResponseEntity<String> addBook(@ModelAttribute("book") Item book) {
-        itemService.saveItem(book);
-        return ResponseEntity.ok("Book added successfully");
-    }
-
-    @PostMapping("/dashboard-book-edit/{id}")
-    @ResponseBody
-    public ResponseEntity<String> editBook(@PathVariable("id") Long id, @Valid @ModelAttribute("bookUpdate") Item bookUpdate, BindingResult bindingResult) {
-        // If there are errors pass them to the javascript
-        if (bindingResult.hasErrors()) {
-            return ResponseEntity.badRequest().body("Invalid item data");
+    @GetMapping("/dashboard")
+    public String showDashBoard(Model model) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        List<Item> bookList = itemService.getBookItems();
+        model.addAttribute("books", bookList);
+        for (GrantedAuthority authority : auth.getAuthorities()) {
+            String userRole = authority.getAuthority();
+            switch (userRole) {
+                case "ROLE_USER":
+                    return "user-dashboard";
+                case "ROLE_MANAGER":
+                    return "manager-dashboard";
+                case "ROLE_STAFF":
+                    return "staff-dashboard";
+            }
         }
-        // Updates Item book Data
-        itemService.updateBookItemById(id, bookUpdate);
-        return ResponseEntity.ok("Book updated successfully");
-    }
-
-    @DeleteMapping("/dashboard-book-delete/{id}")
-    @ResponseBody
-    public  ResponseEntity<String> removeBook(@PathVariable("id") Long id) {
-        try {
-            // Delete the book
-            itemService.removeBookItemById(id);
-            return ResponseEntity.ok("Book deleted successfully");
-        } catch (Exception e) {
-            // Handle the exception as you see fit
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error deleting the book");
-        }
+        return "index";
     }
 }

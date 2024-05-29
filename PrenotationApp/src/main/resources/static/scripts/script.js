@@ -62,7 +62,7 @@ $(document).ready(function() {
                 // Reset form on success submission
                 $('#book-edit-form').trigger('reset');
                 // Refresh the page
-                //location.reload();
+                location.reload();
             },
             error: function(error) {
                 // handle error

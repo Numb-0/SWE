@@ -2,7 +2,6 @@ package LC.PrenotationApp.Entities;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
 
 import java.util.Set;
 
@@ -33,8 +32,6 @@ public class Item {
 
     private String genre;
 
-    private String complex;
-
     private boolean state;
 
     @OneToMany(mappedBy = "item", cascade = CascadeType.ALL)
@@ -49,13 +46,14 @@ public class Item {
     public void setId(long id) {
         this.id = id;
     }
+
     public String getName() {
         return this.name;
     }
-
     public void setName(String name) {
         this.name = name;
     }
+
     public String getAuthor() {
         return this.author;
     }
@@ -66,9 +64,16 @@ public class Item {
     public String getGenre() {
         return this.genre;
     }
-
     public void setGenre(String genre){
         this.genre = genre;
+    }
+
+    public Boolean getState() {
+        return this.state;
+    }
+
+    public void toggleState() {
+        this.state = !this.state;
     }
 
 }

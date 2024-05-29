@@ -18,7 +18,7 @@
   text-decoration-color: yellow;
 }
 
-.admin-dashboard {
+.manager-dashboard {
   display: flex;
   align-items: center;
   flex-direction: column;
