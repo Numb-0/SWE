@@ -29,8 +29,10 @@ public class ReservationService {
         return reservationDao.findReservationsByUser(user);
     }
 
+
     public List<Item> filterItems(String genre, String author, String title) {
         if(genre == null && author == null && title == null){
+
             return null;
         }
         if (genre == null) {
