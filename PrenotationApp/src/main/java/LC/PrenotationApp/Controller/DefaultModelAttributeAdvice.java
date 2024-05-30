@@ -18,6 +18,17 @@ public class DefaultModelAttributeAdvice {
     @Autowired
     ItemService itemService;
 
+
+    @ModelAttribute("book")
+    public Item book (){
+        return new Item(Item.Type.book);
+    }
+
+    @ModelAttribute("bookUpdate")
+    public Item bookUpdate() {
+        return new Item(Item.Type.book);
+    }
+
     @ModelAttribute("isIndexPage")
     public boolean isIndexPage() {
         return false; // Default value

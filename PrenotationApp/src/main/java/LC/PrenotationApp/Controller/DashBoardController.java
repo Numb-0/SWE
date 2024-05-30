@@ -24,16 +24,6 @@ public class DashBoardController {
     @Autowired
     ItemService itemService;
 
-    @ModelAttribute("book")
-    public Item book (){
-        return new Item(Item.Type.book);
-    }
-
-    @ModelAttribute("bookUpdate")
-    public Item bookUpdate() {
-        return new Item(Item.Type.book);
-    }
-
     @GetMapping("/dashboard")
     public String showDashBoard(Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
