@@ -11,6 +11,12 @@ public class Reservation {
 
     public Reservation() {}
 
+    public Reservation(User user) {
+        this.user = user;
+        this.endDate = LocalDate.now().plusDays(5);
+        this.expired = false;
+    }
+
     public Reservation(User user, Item item) {
         this.user = user;
         this.item = item;
@@ -37,4 +43,27 @@ public class Reservation {
         this.endDate = this.endDate.plusMonths(1);
     }
 
+    public void setItem(Item item) {
+        this.item = item;
+    }
+
+    public Item getItem() {
+        return this.item;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public User getUser() {
+        return this.user;
+    }
+
+    public LocalDate getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(LocalDate endDate) {
+        this.endDate = endDate;
+    }
 }

@@ -53,4 +53,8 @@ public class CustomUserDetailsService implements UserDetailsService {
         return null;
     }
 
+    public User getAuthenticatedUserData() {
+        return userDao.findByUsername(getLoggedInUser().getUsername());
+    }
+
 }
