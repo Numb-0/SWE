@@ -29,7 +29,37 @@ public class ReservationService {
         return reservationDao.findReservationsByUser(user);
     }
     // TODO
-    /* public List<Item> filterItems(String genre, String author, String title) {
-        return ;
-    }*/
+public List<Item> filterItems(String genre, String author, String title) {
+        if(genre==null && author==null && title==null){
+            return null;
+        }
+        if (genre == null){
+
+            if(author == null){
+                return itemDao.findItemsByName(title);
+            }
+            if (title == null){
+                return itemDao.findItemsByAuthor(author);
+            }
+
+            return itemDao.findItemsByNameAndAuthor(title, author);
+
+        } else if (author == null) {
+
+            if (title == null){
+                return itemDao.findItemsByGenre(genre);
+            }else{
+                return itemDao.findItemsByNameAndGenre(title, genre);
+            }
+
+        }else if (title == null){
+
+            return itemDao.findItemsByAuthorAndGenre(author, genre);
+
+        }else{
+
+            return itemDao.findItemsByNameAndAuthorAndGenre(title, author,genre);
+
+        }
+    }
 }
