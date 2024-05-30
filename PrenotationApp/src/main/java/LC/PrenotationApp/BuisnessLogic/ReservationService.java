@@ -28,17 +28,17 @@ public class ReservationService {
     public List<Reservation> getReservations(User user) {
         return reservationDao.findReservationsByUser(user);
     }
-    // TODO
-public List<Item> filterItems(String genre, String author, String title) {
-        if(genre==null && author==null && title==null){
+
+    public List<Item> filterItems(String genre, String author, String title) {
+        if(genre == null && author == null && title == null){
             return null;
         }
-        if (genre == null){
+        if (genre == null) {
 
-            if(author == null){
+            if(author == null) {
                 return itemDao.findItemsByName(title);
             }
-            if (title == null){
+            if (title == null) {
                 return itemDao.findItemsByAuthor(author);
             }
 
@@ -46,13 +46,13 @@ public List<Item> filterItems(String genre, String author, String title) {
 
         } else if (author == null) {
 
-            if (title == null){
+            if (title == null) {
                 return itemDao.findItemsByGenre(genre);
-            }else{
+            }else {
                 return itemDao.findItemsByNameAndGenre(title, genre);
             }
 
-        }else if (title == null){
+        }else if (title == null) {
 
             return itemDao.findItemsByAuthorAndGenre(author, genre);
 

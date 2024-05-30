@@ -8,6 +8,30 @@
   <body>
     <section layout:fragment="content">
       <h1 style="text-align: center;">UserDashboard Content</h1>
+      <!-- Book-Table -->
+      <div class="container">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Return Date</th>
+                    <th>State</th>
+                    <!-- Add more columns as needed -->
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="item : ${}">
+                    <td th:text="${item.name}"></td>
+                    <td th:text="${item.author}"></td>
+                    <td th:text="${item.genre}"></td>
+                    <td></td>
+                    <!-- Add more data cells as needed -->
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
     </section>
   </body>
 </html>

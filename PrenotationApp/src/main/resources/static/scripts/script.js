@@ -23,10 +23,6 @@ $(document).ready(function() {
             data: formData,
             success: function(response) {
                 // Handle success
-                // Show toast
-                const booktoast = document.getElementById('book-toast')
-                const toastBootstrap = bootstrap.Toast.getOrCreateInstance(booktoast)
-                toastBootstrap.show();
                 // Close modal
                 $('#book-add-close-btn').click();
                 // Reset form on success submission
