@@ -11,17 +11,13 @@ public class Reservation {
 
     public Reservation() {}
 
-    public Reservation(User user) {
-        this.user = user;
-        this.endDate = LocalDate.now().plusDays(5);
-        this.expired = false;
-    }
-
     public Reservation(User user, Item item) {
         this.user = user;
         this.item = item;
         this.endDate = LocalDate.now().plusDays(5);
         this.expired = false;
+        if (!this.item.getState())
+            this.item.toggleState();
     }
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
@@ -65,5 +61,13 @@ public class Reservation {
 
     public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
+    }
+
+    public Boolean getExpired() {
+        return expired;
+    }
+
+    public void setExpired(Boolean expired) {
+        this.expired = expired;
     }
 }

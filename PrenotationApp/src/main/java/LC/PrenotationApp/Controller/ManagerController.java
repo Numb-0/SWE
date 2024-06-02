@@ -10,12 +10,34 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.print.DocFlavor;
+import java.util.List;
+
 @Controller
 public class ManagerController {
     @Autowired
     ItemService itemService;
 
-    // Calling this creates a newBook
+    @ModelAttribute("book")
+    public Item book (){
+        return new Item(Item.Type.book);
+    }
+
+    @ModelAttribute("bookUpdate")
+    public Item bookUpdate() {
+        return new Item(Item.Type.book);
+    }
+
+    @ModelAttribute("books")
+    public List<Item> getBooks() {
+        return itemService.getBookItems();
+    }
+
+    @GetMapping("/manager-dashboard")
+    public String showManagerDashboard() {
+        return "manager-dashboard";
+    }
+
     @PostMapping("/dashboard-book-add")
     @ResponseBody
     public ResponseEntity<String> addBook(@ModelAttribute("book") Item book) {

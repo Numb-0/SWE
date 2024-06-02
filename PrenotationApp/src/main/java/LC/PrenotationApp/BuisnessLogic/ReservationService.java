@@ -35,9 +35,21 @@ public class ReservationService {
 
 
     public List<Item> filterItems(String genre, String author, String title) {
+        if(genre != null && genre.isEmpty()) {
+            genre = null;
+        }
+
+        if(author != null && author.isEmpty()) {
+            author = null;
+        }
+
+        if(title != null && title.isEmpty()) {
+            title = null;
+        }
+
         if(genre == null && author == null && title == null){
 
-            return null;
+            return itemDao.findItemsByType(Item.Type.book);
         }
         if (genre == null) {
 

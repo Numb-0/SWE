@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 
 import java.util.List;
 
-// This class sets default attributes for all thDefaultModelAttributeAdvicee controllers model
+// This class sets default attributes for all thDefaultModelAttributeAdvice controllers model
 @ControllerAdvice
 public class DefaultModelAttributeAdvice {
 
@@ -20,25 +20,9 @@ public class DefaultModelAttributeAdvice {
     @Autowired
     ItemService itemService;
 
-
-    @ModelAttribute("book")
-    public Item book (){
-        return new Item(Item.Type.book);
-    }
-
-    @ModelAttribute("bookUpdate")
-    public Item bookUpdate() {
-        return new Item(Item.Type.book);
-    }
-
     @ModelAttribute("isIndexPage")
     public boolean isIndexPage() {
         return false; // Default value
-    }
-
-    @ModelAttribute("books")
-    public List<Item> getBooks() {
-        return itemService.getBookItems();
     }
 
     @ModelAttribute("isUserLogged")

@@ -27,16 +27,6 @@ public class DashBoardController {
     @Autowired
     CustomUserDetailsService userDetailsService;
 
-    @ModelAttribute("user_reservations")
-    public List<Reservation> getUserReservations() {
-        return reservationService.getReservations(userDetailsService.getAuthenticatedUserData());
-    }
-
-    @ModelAttribute("reservation")
-    public Reservation createReservation() {
-        return new Reservation();
-    }
-
     @GetMapping("/dashboard")
     public String showDashBoard(Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -44,9 +34,9 @@ public class DashBoardController {
             String userRole = authority.getAuthority();
             switch (userRole) {
                 case "ROLE_USER":
-                    return "user-dashboard";
+                    return "redirect:/user-dashboard";
                 case "ROLE_MANAGER":
-                    return "manager-dashboard";
+                    return "redirect:/manager-dashboard";
                 case "ROLE_STAFF":
                     return "staff-dashboard";
             }

@@ -3,7 +3,7 @@
 // Without this script, the form submission would cause a page reload
 // Using ajax we can capture the requests to the server and hadle using only js 
 
-// Setting Ajax requests toke
+// Setting Ajax requests token
 $(function () {
     var token = $("meta[name='_csrf']").attr("content");
     var header = $("meta[name='_csrf_header']").attr("content");
@@ -12,14 +12,75 @@ $(function () {
     });
 });
 
+// Add Reservation form submission
+$(document).ready(function() {
+    $('#reservation-add-form').on('submit', function(event) {
+        event.preventDefault();
+
+        // This gets the attribute of the form action
+        var url = $(this).attr('action');
+        var formData = $(this).serialize();
+        console.log(formData);
+
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: formData,
+            success: function(response) {
+                // Close modal
+                $('#reservation-add-close-btn').click();
+                // Reset form on success submission
+                $('#reservation-add-form').trigger('reset');
+                // Refresh the page
+                location.reload();
+            },
+            error: function(error) {
+                // handle error
+                console.log(error);
+            }
+        });
+    });
+});
+
+/* // Filter books form submission
+$(document).ready(function() {
+    $('#reservation-filter-form').on('submit', function(event) {
+        event.preventDefault();
+
+        // This gets the attribute of the form action
+        var url = $(this).attr('action');
+        var formData = $(this).serialize();
+        console.log(formData);
+
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: formData,
+            success: function(response) {
+                // Close modal
+                $('#reservation-filter-close-btn').click();
+                // Reset form on success submission
+                //$('#reservation-filter-form').trigger('reset');
+                // Refresh the page
+                location.reload();
+            },
+            error: function(error) {
+                // handle error
+                console.log(error);
+            }
+        });
+    });
+}); */
+
 // Add book form submission
 $(document).ready(function() {
     $('#book-add-form').on('submit', function(event) {
         event.preventDefault();
         var formData = $(this).serialize();
+        var url = $(this).attr('action');
         $.ajax({
             type: 'POST',
-            url: '/dashboard-book-add',
+            url: url,
             data: formData,
             success: function(response) {
                 // Handle success
@@ -111,3 +172,5 @@ document.getElementById('book-edit-modal').addEventListener('hidden.bs.modal', f
         input.classList.remove("is-invalid");
     });
 });
+
+
