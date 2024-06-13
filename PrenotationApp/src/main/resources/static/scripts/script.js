@@ -42,36 +42,6 @@ $(document).ready(function() {
     });
 });
 
-/* // Filter books form submission
-$(document).ready(function() {
-    $('#reservation-filter-form').on('submit', function(event) {
-        event.preventDefault();
-
-        // This gets the attribute of the form action
-        var url = $(this).attr('action');
-        var formData = $(this).serialize();
-        console.log(formData);
-
-        $.ajax({
-            type: 'POST',
-            url: url,
-            data: formData,
-            success: function(response) {
-                // Close modal
-                $('#reservation-filter-close-btn').click();
-                // Reset form on success submission
-                //$('#reservation-filter-form').trigger('reset');
-                // Refresh the page
-                location.reload();
-            },
-            error: function(error) {
-                // handle error
-                console.log(error);
-            }
-        });
-    });
-}); */
-
 // Add book form submission
 $(document).ready(function() {
     $('#book-add-form').on('submit', function(event) {

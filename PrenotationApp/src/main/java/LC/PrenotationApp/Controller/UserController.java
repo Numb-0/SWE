@@ -36,6 +36,12 @@ public class UserController {
         return new Reservation();
     }
 
+    @ModelAttribute("filter_books")
+    public List<Item> getBooks() {
+        // Get all possible books at page load
+        return reservationService.filterItems("","","");
+    }
+
     @GetMapping("/user-dashboard")
     public String showUserDashboard(Model model) {
         return "user-dashboard";

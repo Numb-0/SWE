@@ -38,7 +38,7 @@ public class DashBoardController {
                 case "ROLE_MANAGER":
                     return "redirect:/manager-dashboard";
                 case "ROLE_STAFF":
-                    return "staff-dashboard";
+                    return "redirect:/staff-dashboard";
             }
         }
         return "index";
