@@ -29,8 +29,8 @@
                     <td th:text="${reservation.item.name}"></td>
                     <td th:text="${reservation.item.author}"></td>
                     <td th:text="${reservation.endDate}"></td>
-                    <td th:if="${reservation.expired}" th:text="Expired"></td>
-                    <td th:if="${!reservation.expired}" th:text="Active"></td>
+                    <td th:if="${reservation.activated}" th:text="Activated"></td>
+                    <td th:if="${!reservation.activated}" th:text="NotActivated"></td>
                     <!-- Add more data cells as needed -->
                 </tr>
             </tbody>

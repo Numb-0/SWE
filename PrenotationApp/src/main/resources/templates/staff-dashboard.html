@@ -19,8 +19,10 @@
                 <tr>
                     <th>Title</th>
                     <th>Author</th>
+                    <th>Start Date</th>
                     <th>Return Date</th>
                     <th>Reservation State</th>
+                    <th>Actions</th>
                     <!-- Add more columns as needed -->
                 </tr>
             </thead>
@@ -28,9 +30,16 @@
                 <tr th:each="reservation : ${user_reservations}">
                     <td th:text="${reservation.item.name}"></td>
                     <td th:text="${reservation.item.author}"></td>
+                    <td th:text="${reservation.startDate}"></td>
                     <td th:text="${reservation.endDate}"></td>
-                    <td th:if="${reservation.expired}" th:text="Expired"></td>
-                    <td th:if="${!reservation.expired}" th:text="Active"></td>
+                    <td th:if="${reservation.activated}" th:text="Activated"></td>
+                    <td th:if="${!reservation.activated}" th:text="NotActive"></td>
+                    <td>
+                      <form action="#" th:action="@{'/dashboard-activate-reservation/{id}'(id=${reservation.id})}" th:method="delete" >
+                      <input type="hidden" name="_method" value="delete" />
+                      <button class="btn btn-primary" type="submit" id="activateReservation"> ActivateReservation </button>
+                      </form>
+                    </td>
                     <!-- Add more data cells as needed -->
                 </tr>
             </tbody>
@@ -49,7 +58,7 @@
             <form id="searched-user-form" action="#" th:action="@{/dashboard-get-user-reservations}" method="post">
             <div class="form-group">
                 <label for="reservation-name">User Name</label>
-                <input type="text" class="form-control" id="reservation-name" th:value="${searched_user}" name="searched_user" placeholder="Enter reservation name">
+                <input type="text" class="form-control" id="reservation-name" th:value="${searched_user}" name="searched_user" placeholder="Enter user name">
             </div>
               <div class="modal-footer">
                 <button id="searched-user-close-btn" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

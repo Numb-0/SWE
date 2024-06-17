@@ -26,6 +26,7 @@ public class ReservationConfirmService {
 
     public void startReservation(Reservation reservation) {
         reservation.ReservationStart(LocalDate.now());
+        reservationDao.save(reservation);
     }
 
 }

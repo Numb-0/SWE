@@ -16,6 +16,7 @@ public class Reservation {
         this.item = item;
         this.endDate = LocalDate.now().plusDays(5);
         this.expired = false;
+        this.activated = false;
         if (!this.item.getState())
             this.item.toggleState();
     }
@@ -25,6 +26,7 @@ public class Reservation {
     private LocalDate startDate;
     private LocalDate endDate;
     private Boolean expired;
+    private Boolean activated;
 
     @ManyToOne
     @JoinColumn(name = "Id_Item")
@@ -36,6 +38,7 @@ public class Reservation {
 
     public void ReservationStart(LocalDate date) {
         this.startDate = date;
+        this.activated = true;
         this.endDate = this.endDate.plusMonths(1);
     }
 
@@ -63,11 +66,35 @@ public class Reservation {
         this.endDate = endDate;
     }
 
+    public LocalDate getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
+    }
+
     public Boolean getExpired() {
         return expired;
     }
 
     public void setExpired(Boolean expired) {
         this.expired = expired;
+    }
+
+    public Boolean getActivated() {
+        return activated;
+    }
+
+    public void setActivated(Boolean activated) {
+        this.activated = activated;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getId() {
+        return id;
     }
 }

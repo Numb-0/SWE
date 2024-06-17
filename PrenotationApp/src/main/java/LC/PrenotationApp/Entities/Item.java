@@ -35,9 +35,6 @@ public class Item {
     private boolean state;
 
     @OneToMany(mappedBy = "item", cascade = CascadeType.ALL)
-    private Set<Review> reviews;
-
-    @OneToMany(mappedBy = "item", cascade = CascadeType.ALL)
     private Set<Reservation> reservations;
 
     public Long getId() {

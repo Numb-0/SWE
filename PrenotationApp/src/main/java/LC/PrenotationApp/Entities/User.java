@@ -47,8 +47,6 @@ public class User {
     public String getPassword() { return this.password; }
     public Role getRole() {return this.role;}
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private Set<Review> reviews;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private Set<Reservation> reservations;
