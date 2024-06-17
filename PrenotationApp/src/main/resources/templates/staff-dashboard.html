@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark" xmlns:th="https://www.thymeleaf.org" 
+      layout:decorate="~{/fragments/layouts/base_layout}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+  <head>
+    <title>DashBoard</title>
+  </head>
+  <body>
+    <section layout:fragment="content">
+      <h1 style="text-align: center;">UserDashboard Content</h1>
+      <div class="d-flex justify-content-center">
+        <button type="button" data-bs-toggle="modal" data-bs-target="#searched-user-modal" class="btn btn-outline-warning">Add</button>
+      </div>
+
+      <!-- Reservation-Table -->
+      <div class="container">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Start Date</th>
+                    <th>Return Date</th>
+                    <th>Reservation State</th>
+                    <th>Actions</th>
+                    <!-- Add more columns as needed -->
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="reservation : ${user_reservations}">
+                    <td th:text="${reservation.item.name}"></td>
+                    <td th:text="${reservation.item.author}"></td>
+                    <td th:text="${reservation.startDate}"></td>
+                    <td th:text="${reservation.endDate}"></td>
+                    <td th:if="${reservation.activated}" th:text="Activated"></td>
+                    <td th:if="${!reservation.activated}" th:text="NotActive"></td>
+                    <td>
+                      <form action="#" th:action="@{'/dashboard-activate-reservation/{id}'(id=${reservation.id})}" th:method="delete" >
+                      <input type="hidden" name="_method" value="delete" />
+                      <button class="btn btn-primary" type="submit" id="activateReservation"> ActivateReservation </button>
+                      </form>
+                    </td>
+                    <!-- Add more data cells as needed -->
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Reservation-add Modal -->
+    <div class="modal fade" id="searched-user-modal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="searched-user-modal-label">Add Reservation</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form id="searched-user-form" action="#" th:action="@{/dashboard-get-user-reservations}" method="post">
+            <div class="form-group">
+                <label for="reservation-name">User Name</label>
+                <input type="text" class="form-control" id="reservation-name" th:value="${searched_user}" name="searched_user" placeholder="Enter user name">
+            </div>
+              <div class="modal-footer">
+                <button id="searched-user-close-btn" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button id="searched-user-btn" type="submit" class="btn btn-primary">Add Reservation</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div> 
+    </div>
+    </section>
+  </body>
+</html>

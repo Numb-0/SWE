@@ -41,7 +41,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/", "/register","/index", "/images/**", "/styles/**", "/scripts/**" ).permitAll() // allow unauthenticated access to pages
                         .requestMatchers("/user-dashboard").hasRole("USER")
-                        .requestMatchers("/admin-dashboard").hasRole("ADMIN")
+                        .requestMatchers("/manager-dashboard").hasRole("MANAGER")
                         .anyRequest().authenticated())
                 .formLogin(form -> form
                     .loginPage("/login").defaultSuccessUrl("/", false)

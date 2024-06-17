@@ -8,6 +8,93 @@
   <body>
     <section layout:fragment="content">
       <h1 style="text-align: center;">UserDashboard Content</h1>
+      <div class="d-flex justify-content-center">
+        <button type="button" data-bs-toggle="modal" data-bs-target="#reservation-add-modal" class="btn btn-outline-warning">Add</button>
+        <button type="button" data-bs-toggle="modal" data-bs-target="#reservation-filter-modal" class="btn btn-outline-warning">Filters</button>
+      </div>
+      <!-- Reservation-Table -->
+      <div class="container">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Return Date</th>
+                    <th>Reservation State</th>
+                    <!-- Add more columns as needed -->
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="reservation : ${user_reservations}">
+                    <td th:text="${reservation.item.name}"></td>
+                    <td th:text="${reservation.item.author}"></td>
+                    <td th:text="${reservation.endDate}"></td>
+                    <td th:if="${reservation.activated}" th:text="Activated"></td>
+                    <td th:if="${!reservation.activated}" th:text="NotActivated"></td>
+                    <!-- Add more data cells as needed -->
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Reservation-add Modal -->
+    <div class="modal fade" id="reservation-add-modal" tabindex="-1" aria-labelledby="reservation-add-modal-label" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="reservation-add-modal-label">Add Reservation</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form id="reservation-add-form" action="#" th:action="@{/dashboard-reservation-add}" method="post" th:object="${reservation}">
+              <select class="form-select" aria-label="Titles" th:field="*{item}">
+                <option th:each="book : ${filter_books}" th:value="${book.id}" th:text="${book.name}"></option>
+                <option th:if="${#lists.isEmpty(filter_books)}" value="" disabled selected>No books available</option>
+              </select>
+              <div class="modal-footer">
+                <button id="reservation-add-close-btn" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button id="reservation-add-btn" type="submit" class="btn btn-primary">Add Reservation</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div> 
+    </div>
+
+    <!-- Reservation-filter Modal -->
+    <div class="modal fade" id="reservation-filter-modal" tabindex="-1" aria-labelledby="reservation-filter-modal-label" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="reservation-filter-modal-label">Add Reservation</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form id="reservation-filter-form" action="#" th:action="@{/dashboard-reservation-filter}" method="post">
+              <div class="mb-3">
+                <label>Author</label>
+                <input type="text" class="book-edit-input form-control" name="author" placeholder="Author">
+              </div>
+              <div class="mb-3">
+                <label>Title</label>
+                <input type="text" class="book-edit-input form-control" name="title" placeholder="Title">
+              </div>
+              <select class="form-select" aria-label="Genre" name="genre">
+                <option value="">Select a genre</option>
+                <option th:value="Romance" value="1">Romance</option>
+                <option th:value="Adventure" value="2">Adventure</option>
+                <option th:value="Fantasy" value="3">Fantasy</option>
+              </select>
+              <div class="modal-footer">
+                <button id="reservation-filter-close-btn" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button id="reservation-filter-btn" type="submit" class="btn btn-primary">Add Reservation</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div> 
+    </div>
+
     </section>
   </body>
 </html>

@@ -7,19 +7,12 @@
   </head>
   <body>
     <section layout:fragment="content">
-      <div class="admin-dashboard">
+      <div class="manager-dashboard">
         <h1>Admin Dashboard</h1>
-        <p>Welcome to the admin dashboard</p>
-        <div class="btn-group">
-          <div class="dropdown">
-            <button type="button" class="btn btn-secondary dropdown-toggle" role="button" data-bs-toggle="dropdown">Books</button>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#book-add-modal">Add</a></li>
-              </ul>        
-          </div>
-          <button type="button" class="btn btn-outline-primary">ClassRoom Reservations</button>
-        </div>
+        <p>Welcome to the manager dashboard</p>
+        <button type="button" data-bs-toggle="modal" data-bs-target="#book-add-modal" class="btn btn-outline-warning">Add</button>
       </div>
+      <!-- Book-Table -->
       <div class="container">
         <table class="table table-striped">
             <thead>
@@ -51,20 +44,6 @@
             </tbody>
         </table>
     </div>
-      <!-- Toast -->
-      <div class="toast-container position-fixed bottom-0 end-0 p-3">
-        <div id="book-toast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-          <div class="toast-header">
-            <img class="rounded me-2">
-            <strong class="me-auto">Bootstrap</strong>
-            <small>11 mins ago</small>
-            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-          </div>
-          <div class="toast-body">
-            Hello, world! This is a toast message.
-          </div>
-        </div>
-      </div>     
       <!-- Book-add Modal -->
       <div class="modal fade" id="book-add-modal" tabindex="-1" aria-labelledby="book-add-modal-label" aria-hidden="true">
         <div class="modal-dialog">
@@ -127,7 +106,6 @@
           </div>
         </div> 
       </div>
-      <!-- Book-edit Modal -->
     </section>
   </body>
 </html>
