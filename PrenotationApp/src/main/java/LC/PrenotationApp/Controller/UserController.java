@@ -70,7 +70,7 @@ public class UserController {
 
     @PostMapping("/dashboard-reservation-delete/{id}")
     public String removeReservation(@PathVariable("id") Integer id) {
-        reservationService.removeNotActiveReservation(id);
+        reservationService.removeReservation(id);
         return "redirect:/user-dashboard"; // Use redirect to avoid duplicate form submissions
     }
 

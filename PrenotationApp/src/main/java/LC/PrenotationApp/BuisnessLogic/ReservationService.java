@@ -5,11 +5,10 @@ import LC.PrenotationApp.DAO.ReservationDao;
 import LC.PrenotationApp.Entities.Item;
 import LC.PrenotationApp.Entities.Reservation;
 import LC.PrenotationApp.Entities.User;
-import jakarta.validation.constraints.Null;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -43,13 +42,27 @@ public class ReservationService {
         return filteredReservations;
     }
 
-    public void removeNotActiveReservation(Integer id) {
+    public void removeReservation(Integer id) {
         Reservation reservation = reservationDao.findById(id).orElseThrow(() -> new RuntimeException("Reservation not found with id: " + id));
-        if(!reservation.getActive()) {
+        if(!reservation.getExpired() && !reservation.getActive()) {
             reservation.getItem().toggleState();
             reservationDao.delete(reservation);
         }
     }
+
+     public void checkExpired() {
+        List<Reservation> reservations = (List<Reservation>) reservationDao.findAll();
+        for (Reservation res : reservations) {
+            if(res.getEndDate().isBefore(LocalDate.now()) && !res.getExpired()) {
+                if (res.getActive()) {
+                    res.setExpired(true);
+                }
+                else {
+                    reservationDao.delete(res);
+                }
+            }
+        }
+     }
 
 
     public List<Item> filterItems(String genre, String author, String title) {

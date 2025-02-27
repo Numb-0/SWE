@@ -2,7 +2,6 @@ package LC.PrenotationApp.Controller;
 
 import LC.PrenotationApp.BuisnessLogic.CustomUserDetailsService;
 import LC.PrenotationApp.BuisnessLogic.ReservationConfirmService;
-import LC.PrenotationApp.BuisnessLogic.ReservationService;
 import LC.PrenotationApp.Entities.Reservation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister;
@@ -15,8 +14,6 @@ import java.util.List;
 
 @Controller
 public class StaffController {
-    @Autowired
-    ReservationService reservationService;
 
     @Autowired
     ReservationConfirmService reservationConfirmService;
@@ -35,18 +32,18 @@ public class StaffController {
     }
 
     @PostMapping("/dashboard-get-user-reservations")
-    public String getUserReservations(Model model, @RequestParam String searched_user) {
-        model.addAttribute("user_reservations", reservationService.getReservations(userDetailsService.getUserByUsername(searched_user)));
+    public String getUserReservations(Model model, @RequestParam(name = "searched_user", required = false) String searched_user) {
+        model.addAttribute("user_reservations", reservationConfirmService.getReservations(userDetailsService.getUserByUsername(searched_user)));
         return "staff-dashboard";
     }
 
     @PostMapping("dashboard-activate-reservation/{id}")
-    public String activateReservation(@PathVariable long id) throws ChangeSetPersister.NotFoundException {
+    public String activateReservation(@PathVariable("id") long id) throws ChangeSetPersister.NotFoundException {
         reservationConfirmService.startReservation(reservationConfirmService.getReservationById(id));
         return "staff-dashboard";
     }
 
-    @PostMapping("dashboard-close-reservation/{id}")
+    @DeleteMapping("dashboard-close-reservation/{id}")
     public String closeReservation(@PathVariable long id) throws ChangeSetPersister.NotFoundException {
         reservationConfirmService.closeReservation(reservationConfirmService.getReservationById(id));
         return "staff-dashboard";

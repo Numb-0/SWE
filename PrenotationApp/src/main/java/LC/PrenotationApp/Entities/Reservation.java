@@ -3,7 +3,6 @@ package LC.PrenotationApp.Entities;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
-import java.time.LocalDate;
 
 @Entity
 @Table(name= "Reservations")
@@ -36,8 +35,8 @@ public class Reservation {
     @JoinColumn(name = "Id_User")
     private User user;
 
-    public void reservationStart(LocalDate date) {
-        this.startDate = date;
+    public void reservationStart() {
+        this.startDate = LocalDate.now();
         this.active = true;
         this.endDate = this.endDate.plusMonths(1);
     }

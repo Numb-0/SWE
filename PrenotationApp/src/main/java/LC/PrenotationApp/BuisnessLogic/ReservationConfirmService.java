@@ -2,16 +2,22 @@ package LC.PrenotationApp.BuisnessLogic;
 
 import LC.PrenotationApp.DAO.ReservationDao;
 import LC.PrenotationApp.Entities.Reservation;
+import LC.PrenotationApp.Entities.User;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
+import java.util.List;
 
 @Service
 public class ReservationConfirmService {
     @Autowired
     private ReservationDao reservationDao;
+
+    public List<Reservation> getReservations(User user) {
+        return reservationDao.findByUser(user);
+    }
 
     public Reservation getReservationById(long id) throws ChangeSetPersister.NotFoundException {
         Reservation reservation = reservationDao.findById(id);
@@ -22,11 +28,15 @@ public class ReservationConfirmService {
     }
 
     public void startReservation(Reservation reservation) {
-        reservation.reservationStart(LocalDate.now());
-        reservationDao.save(reservation);
+        if (!reservation.getActive() && !reservation.getExpired()) { 
+            reservation.reservationStart();
+            reservationDao.save(reservation);
+        }
     }
 
     public void closeReservation(Reservation reservation) {
-        reservation.closeReservation();
+        if (reservation.getExpired()) {
+            reservation.closeReservation();
+        }
     }
 }
