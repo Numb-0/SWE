@@ -13,7 +13,7 @@ import java.util.List;
 
 public interface ItemDao extends CrudRepository<Item, Integer> {
 
-    Item findById(long id);
+    /* Item findById(long id);
 
     @Query("SELECT i FROM Item i WHERE i.name = :name AND i.author = :author AND i.genre = :genre")
     List<Item> findItemsByNameAndAuthorAndGenre(@Param("name") String name, @Param("author") String author, @Param("genre") String genre);
@@ -37,5 +37,25 @@ public interface ItemDao extends CrudRepository<Item, Integer> {
     List<Item> findItemsByGenre(@Param("genre") String genre);
 
     @Query("SELECT i FROM Item i WHERE i.type = :type")
-    List<Item> findItemsByType(@Param("type") Item.Type type);
+    List<Item> findItemsByType(@Param("type") Item.Type type); */
+    Item findById(long id);
+
+    List<Item> findByNameAndAuthorAndGenre(String name, String author, String genre);
+
+    List<Item> findByNameAndAuthor(String name, String author);
+
+    List<Item> findByNameAndGenre(String name, String genre);
+
+    List<Item> findByAuthorAndGenre(String author, String genre);
+
+    List<Item> findByName(String name);
+
+    List<Item> findByAuthor(String author);
+
+    List<Item> findByGenre(String genre);
+
+    List<Item> findByType(Item.Type type);
+
+    // New query to get items with state = 0
+    List<Item> findByState(boolean state);
 }

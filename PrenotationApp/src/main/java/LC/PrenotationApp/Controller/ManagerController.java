@@ -58,7 +58,7 @@ public class ManagerController {
 
     @DeleteMapping("/dashboard-book-delete/{id}")
     @ResponseBody
-    public  ResponseEntity<String> removeBook(@PathVariable("id") Long id) {
+    public  ResponseEntity<String> removeBook(@PathVariable("id") Integer id) {
         try {
             // Delete the book
             itemService.removeBookItemById(id);

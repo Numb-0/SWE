@@ -7,7 +7,7 @@
   </head>
   <body>
     <section layout:fragment="content">
-      <h1 style="text-align: center;">UserDashboard Content</h1>
+      <h1 style="text-align: center;">StaffDashboard Content</h1>
       <div class="d-flex justify-content-center">
         <button type="button" data-bs-toggle="modal" data-bs-target="#searched-user-modal" class="btn btn-outline-warning">Add</button>
       </div>
@@ -32,8 +32,8 @@
                     <td th:text="${reservation.item.author}"></td>
                     <td th:text="${reservation.startDate}"></td>
                     <td th:text="${reservation.endDate}"></td>
-                    <td th:if="${reservation.activated}" th:text="Activated"></td>
-                    <td th:if="${!reservation.activated}" th:text="NotActive"></td>
+                    <td th:if="${reservation.active}" th:text="Active"></td>
+                    <td th:if="${!reservation.active}" th:text="NotActive"></td>
                     <td>
                       <form action="#" th:action="@{'/dashboard-activate-reservation/{id}'(id=${reservation.id})}" th:method="delete" >
                       <input type="hidden" name="_method" value="delete" />
@@ -51,7 +51,7 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="searched-user-modal-label">Add Reservation</h5>
+            <h5 class="modal-title" id="searched-user-modal-label">Search Reservations</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
@@ -62,7 +62,7 @@
             </div>
               <div class="modal-footer">
                 <button id="searched-user-close-btn" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button id="searched-user-btn" type="submit" class="btn btn-primary">Add Reservation</button>
+                <button id="searched-user-btn" type="submit" class="btn btn-primary">Check Reservations</button>
               </div>
             </form>
           </div>

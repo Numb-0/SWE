@@ -10,9 +10,9 @@ import java.util.Set;
 @Table(name="Users")
 public class User {
     public enum Role {
-        user,
-        manager,
-        staff
+        user, // 0
+        manager, // 1
+        staff // 2
     }
 
     @Id

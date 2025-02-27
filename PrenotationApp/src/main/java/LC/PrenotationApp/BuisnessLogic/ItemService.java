@@ -4,10 +4,6 @@ import LC.PrenotationApp.DAO.ItemDao;
 import LC.PrenotationApp.Entities.Item;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import jakarta.persistence.criteria.CriteriaBuilder;
-import jakarta.persistence.criteria.CriteriaQuery;
-import jakarta.persistence.criteria.Root;
-import jakarta.persistence.criteria.Predicate;
 
 import java.util.List;
 
@@ -22,8 +18,12 @@ public class ItemService {
     }
 
     public List<Item> getBookItems() {
-        return itemDao.findItemsByType(Item.Type.book);
+        return itemDao.findByType(Item.Type.book);
     }
+
+    public List<Item> getReservableBookItems() {
+        return itemDao.findByState(false);
+    };
 
     public Item getItemById(long id) {
         return itemDao.findById(id);
@@ -41,9 +41,7 @@ public class ItemService {
         itemDao.save(item);
     }
 
-    public void removeBookItemById(Long id) {
-        itemDao.deleteById(Math.toIntExact(id));
+    public void removeBookItemById(Integer id) {
+        itemDao.deleteById(id);
     }
-
-
 }

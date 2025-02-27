@@ -16,7 +16,7 @@ public class Reservation {
         this.item = item;
         this.endDate = LocalDate.now().plusDays(5);
         this.expired = false;
-        this.activated = false;
+        this.active = false;
         if (!this.item.getState())
             this.item.toggleState();
     }
@@ -26,7 +26,7 @@ public class Reservation {
     private LocalDate startDate;
     private LocalDate endDate;
     private Boolean expired;
-    private Boolean activated;
+    private Boolean active;
 
     @ManyToOne
     @JoinColumn(name = "Id_Item")
@@ -36,10 +36,15 @@ public class Reservation {
     @JoinColumn(name = "Id_User")
     private User user;
 
-    public void ReservationStart(LocalDate date) {
+    public void reservationStart(LocalDate date) {
         this.startDate = date;
-        this.activated = true;
+        this.active = true;
         this.endDate = this.endDate.plusMonths(1);
+    }
+
+    public void closeReservation() {
+        this.active = false;
+        this.item.toggleState();
     }
 
     public void setItem(Item item) {
@@ -82,12 +87,12 @@ public class Reservation {
         this.expired = expired;
     }
 
-    public Boolean getActivated() {
-        return activated;
+    public Boolean getActive() {
+        return active;
     }
 
-    public void setActivated(Boolean activated) {
-        this.activated = activated;
+    public void setActive(Boolean active) {
+        this.active = active;
     }
 
     public void setId(Long id) {

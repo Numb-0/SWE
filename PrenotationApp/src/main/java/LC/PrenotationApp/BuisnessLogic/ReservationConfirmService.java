@@ -1,6 +1,5 @@
 package LC.PrenotationApp.BuisnessLogic;
 
-import LC.PrenotationApp.DAO.ItemDao;
 import LC.PrenotationApp.DAO.ReservationDao;
 import LC.PrenotationApp.Entities.Reservation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +12,6 @@ import java.time.LocalDate;
 public class ReservationConfirmService {
     @Autowired
     private ReservationDao reservationDao;
-    @Autowired
-    private ItemDao itemDao;
 
     public Reservation getReservationById(long id) throws ChangeSetPersister.NotFoundException {
         Reservation reservation = reservationDao.findById(id);
@@ -25,8 +22,11 @@ public class ReservationConfirmService {
     }
 
     public void startReservation(Reservation reservation) {
-        reservation.ReservationStart(LocalDate.now());
+        reservation.reservationStart(LocalDate.now());
         reservationDao.save(reservation);
     }
 
+    public void closeReservation(Reservation reservation) {
+        reservation.closeReservation();
+    }
 }

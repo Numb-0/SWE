@@ -5,18 +5,17 @@ import LC.PrenotationApp.BuisnessLogic.ItemService;
 import LC.PrenotationApp.BuisnessLogic.ReservationService;
 import LC.PrenotationApp.Entities.Item;
 import LC.PrenotationApp.Entities.Reservation;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
 public class UserController {
-
     @Autowired
     private ReservationService reservationService;
 
@@ -39,7 +38,7 @@ public class UserController {
     @ModelAttribute("filter_books")
     public List<Item> getBooks() {
         // Get all possible books at page load
-        return reservationService.filterItems("","","");
+        return itemService.getReservableBookItems();
     }
 
     @GetMapping("/user-dashboard")
@@ -57,9 +56,22 @@ public class UserController {
     }
 
     @PostMapping("/dashboard-reservation-filter")
-    public String updateFilter(@RequestParam String genre, @RequestParam String author, @RequestParam String title, Model model) {
-        model.addAttribute("filter_books", reservationService.filterItems(genre, author, title));
+    public String updateFilter(
+    @RequestParam(name = "genre", required = false) String genre,
+    @RequestParam(name = "author", required = false) String author,
+    @RequestParam(name = "title", required = false) String title,
+    Model model) {
+        List<Item> filteredBooks = reservationService.filterItems(genre, author, title);
+        System.out.println(filteredBooks);
+        model.addAttribute("filter_books", filteredBooks);
+        model.addAttribute("user_reservations", reservationService.getFilteredReservations(userDetailsService.getAuthenticatedUserData(), filteredBooks));
         return "user-dashboard";
+    }
+
+    @PostMapping("/dashboard-reservation-delete/{id}")
+    public String removeReservation(@PathVariable("id") Integer id) {
+        reservationService.removeNotActiveReservation(id);
+        return "redirect:/user-dashboard"; // Use redirect to avoid duplicate form submissions
     }
 
 }

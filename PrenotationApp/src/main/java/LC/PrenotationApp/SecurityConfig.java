@@ -1,7 +1,5 @@
 package LC.PrenotationApp;
 
-import LC.PrenotationApp.BuisnessLogic.CustomUserDetailsService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -16,8 +14,6 @@ import org.springframework.security.web.authentication.SimpleUrlAuthenticationSu
 
 @Configuration
 public class SecurityConfig {
-    @Autowired
-    private CustomUserDetailsService userDetailsService;
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();

@@ -11,6 +11,7 @@ import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ReservationService {
@@ -26,11 +27,28 @@ public class ReservationService {
     }
 
     public List<Reservation> getReservations(User user) {
-        return reservationDao.findReservationsByUser(user);
+        return reservationDao.findByUser(user);
     }
 
     public void saveReservation(Reservation reservation) {
         reservationDao.save(reservation);
+    }
+
+    public List<Reservation> getFilteredReservations(User user, List<Item> itemlist) {
+        List<Reservation> reservations = getReservations(user);
+        List<Reservation> filteredReservations = reservations.stream()
+        .filter(reservation -> itemlist.contains(reservation.getItem()))
+        .collect(Collectors.toList());
+
+        return filteredReservations;
+    }
+
+    public void removeNotActiveReservation(Integer id) {
+        Reservation reservation = reservationDao.findById(id).orElseThrow(() -> new RuntimeException("Reservation not found with id: " + id));
+        if(!reservation.getActive()) {
+            reservation.getItem().toggleState();
+            reservationDao.delete(reservation);
+        }
     }
 
 
@@ -49,34 +67,34 @@ public class ReservationService {
 
         if(genre == null && author == null && title == null){
 
-            return itemDao.findItemsByType(Item.Type.book);
+            return itemDao.findByType(Item.Type.book);
         }
         if (genre == null) {
 
             if(author == null) {
-                return itemDao.findItemsByName(title);
+                return itemDao.findByName(title);
             }
             if (title == null) {
-                return itemDao.findItemsByAuthor(author);
+                return itemDao.findByAuthor(author);
             }
 
-            return itemDao.findItemsByNameAndAuthor(title, author);
+            return itemDao.findByNameAndAuthor(title, author);
 
         } else if (author == null) {
 
             if (title == null) {
-                return itemDao.findItemsByGenre(genre);
+                return itemDao.findByGenre(genre);
             }else {
-                return itemDao.findItemsByNameAndGenre(title, genre);
+                return itemDao.findByNameAndGenre(title, genre);
             }
 
         }else if (title == null) {
 
-            return itemDao.findItemsByAuthorAndGenre(author, genre);
+            return itemDao.findByAuthorAndGenre(author, genre);
 
         }else{
 
-            return itemDao.findItemsByNameAndAuthorAndGenre(title, author,genre);
+            return itemDao.findByNameAndAuthorAndGenre(title, author,genre);
 
         }
     }

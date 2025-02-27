@@ -15,12 +15,14 @@ import java.util.List;
 public interface ReservationDao extends CrudRepository<Reservation, Integer> {
     Reservation findById(long id);
 
-    @Query("SELECT i FROM Reservation i WHERE i.user = :user")
-    List<Reservation> findReservationsByUser(@Param("user") User user);
+    //@Query("SELECT i FROM Reservation i WHERE i.user = :user")
+    //List<Reservation> findReservationsByUser(@Param("user") User user);
 
-    @Query("SELECT i FROM Reservation i WHERE i.expired = :expired AND i.user = :user")
-    List<Reservation> findReservationByStateAndUser(@Param("expired") Boolean expired, @Param("user") User user);
+    //@Query("SELECT i FROM Reservation i WHERE i.expired = :expired AND i.user = :user")
+    //List<Reservation> findReservationByStateAndUser(@Param("expired") Boolean expired, @Param("user") User user);
 
+    List<Reservation> findByUser(User user);
+    List<Reservation> findByExpiredAndUser(Boolean expired, User user);
 
 }
 
