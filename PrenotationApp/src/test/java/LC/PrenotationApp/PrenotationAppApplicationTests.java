@@ -142,8 +142,14 @@ class PrenotationAppApplicationTests {
 
         assertEquals("Book is reserved", response.getBody());
 		assertEquals(reservationDao.findByUser(mockUser2).size(), 0);
+
 		// Clean up
 		reservationDao.delete(mockReservation);
     }
+
+	@Test
+	public void testRemoveReservationNotActive() {
+		
+	}
 
 }
