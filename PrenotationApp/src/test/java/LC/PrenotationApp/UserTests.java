@@ -28,7 +28,7 @@ import LC.PrenotationApp.Controller.UserController;;
 
 @SpringBootTest
 @Transactional
-class PrenotationAppApplicationTests {
+class UserTests {
 
 	@Autowired
 	private UserDao userDao;
