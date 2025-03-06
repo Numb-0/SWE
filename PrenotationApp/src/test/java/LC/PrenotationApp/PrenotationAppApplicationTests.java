@@ -149,7 +149,30 @@ class PrenotationAppApplicationTests {
 
 	@Test
 	public void testRemoveReservationNotActive() {
-		
+        Reservation mockReservation = new Reservation(mockUser, mockBook);
+		// Add mockReservation to database
+		reservationDao.save(mockReservation);
+
+		userController.removeReservation(mockReservation.getId().intValue());
+
+		// Check if mockReservation is still in database
+		assertEquals(reservationDao.findById(mockReservation.getId()), null);
+	}
+
+	@Test
+	public void testRemoveReservationActive() {
+        Reservation mockReservation = new Reservation(mockUser, mockBook);
+
+		// Set active 
+		mockReservation.setActive(true);
+
+		// Add mockReservation to database
+		reservationDao.save(mockReservation);
+
+		userController.removeReservation(mockReservation.getId().intValue());
+
+		// Check if mockReservation is still in database
+		assertEquals(reservationDao.findById(mockReservation.getId()), mockReservation);
 	}
 
 }
