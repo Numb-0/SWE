@@ -8,7 +8,11 @@ import java.time.LocalDate;
 @Table(name= "Reservations")
 public class Reservation {
 
-    public Reservation() {}
+    public Reservation() {
+        this.endDate = LocalDate.now().plusDays(5);
+        this.expired = false;
+        this.active = false;
+    }
 
     public Reservation(User user, Item item) {
         this.user = user;
@@ -16,8 +20,7 @@ public class Reservation {
         this.endDate = LocalDate.now().plusDays(5);
         this.expired = false;
         this.active = false;
-        if (!this.item.getState())
-            this.item.toggleState();
+        this.item.setState(true);
     }
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
@@ -44,6 +47,14 @@ public class Reservation {
     public void closeReservation() {
         this.active = false;
         this.item.toggleState();
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public void setItem(Item item) {
@@ -94,11 +105,4 @@ public class Reservation {
         this.active = active;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getId() {
-        return id;
-    }
 }

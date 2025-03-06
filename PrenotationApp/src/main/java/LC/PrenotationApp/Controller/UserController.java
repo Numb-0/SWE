@@ -51,7 +51,7 @@ public class UserController {
     public ResponseEntity<String> addReservation(@ModelAttribute("reservation") Reservation reservation) {
         if (reservation.getItem().getState())
             return ResponseEntity.ok("Book is reserved");
-        reservationService.saveReservation(new Reservation(userDetailsService.getAuthenticatedUserData(), reservation.getItem()));
+        reservationService.createReservation(reservation, userDetailsService.getAuthenticatedUserData(), reservation.getItem());
         return ResponseEntity.ok("Reservation added successfully");
     }
 

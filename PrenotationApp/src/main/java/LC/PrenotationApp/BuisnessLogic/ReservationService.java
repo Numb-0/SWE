@@ -19,18 +19,15 @@ public class ReservationService {
     @Autowired
     private ItemDao itemDao;
 
-    public void createReservation(User user, Item item) {
-        item.toggleState();
-        Reservation reservation = new Reservation(user, item);
+    public void createReservation(Reservation reservation, User user, Item item) {
+        reservation.setUser(user);
+        reservation.setItem(item);
+        reservation.getItem().setState(true);
         reservationDao.save(reservation);
     }
 
     public List<Reservation> getReservations(User user) {
         return reservationDao.findByUser(user);
-    }
-
-    public void saveReservation(Reservation reservation) {
-        reservationDao.save(reservation);
     }
 
     public List<Reservation> getFilteredReservations(User user, List<Item> itemlist) {

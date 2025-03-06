@@ -8,8 +8,7 @@ import java.util.Set;
 @Entity
 @Table(name= "Items")
 public class Item {
-    public Item() {
-    }
+    public Item() {}
 
     public Item(Item.Type type) {
         // Are attributes already NULL?
@@ -67,6 +66,10 @@ public class Item {
 
     public Boolean getState() {
         return this.state;
+    }
+    
+    public void setState(Boolean state) {
+        this.state = state;
     }
 
     public void toggleState() {

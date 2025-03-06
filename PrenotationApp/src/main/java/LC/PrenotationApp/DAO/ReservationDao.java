@@ -14,7 +14,6 @@ public interface ReservationDao extends CrudRepository<Reservation, Integer> {
 
     List<Reservation> findByUser(User user);
 
-    List<Reservation> findByExpiredAndUser(Boolean expired, User user);
-
+    //List<Reservation> findByExpiredAndUser(Boolean expired, User user);
 }
 

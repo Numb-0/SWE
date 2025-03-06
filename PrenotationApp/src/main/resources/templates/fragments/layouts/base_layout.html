@@ -26,6 +26,7 @@
                 </ul>
 
                 <ul class="nav nav-underline col-12 col-lg-auto mb-2 justify-content-center mb-md-0">
+                  <li class="ms-auto" th:if="${isIndexPage && !isUserLogged}"><a th:href="@{/login}" class="nav-link px-2 text-secondary fw-bold fs-4">Login</a></li>
                   <li class="ms-auto" th:if="${isIndexPage && !isUserLogged}"><a th:href="@{/register}" class="nav-link px-2 text-secondary fw-bold fs-4">Register</a></li>
                   <li class="ms-auto" th:if="${isUserLogged}"><p th:text="${AuthUser.getRole() + ' | ' + AuthUser.username}" class="nav-link px-2 user-name fw-bold fs-4"></p></li>
                   <li class="ms-auto" th:if="${isUserLogged}">
