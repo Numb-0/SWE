@@ -27,7 +27,7 @@ public class StaffController {
     }
 
     @GetMapping("/staff-dashboard")
-    public String showStaffDashboard(Model model) {
+    public String showStaffDashboard() {
         return "staff-dashboard";
     }
 

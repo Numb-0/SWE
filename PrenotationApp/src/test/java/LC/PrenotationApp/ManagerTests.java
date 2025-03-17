@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.validation.DataBinder;
 
 import LC.PrenotationApp.Controller.ManagerController;
 import LC.PrenotationApp.DAO.ItemDao;
@@ -69,7 +68,7 @@ public class ManagerTests {
 
         // Check if item is in database
         managerController.addBook(mockAddBook);
-        assertEquals(itemDao.findById(mockAddBook.getId()), mockAddBook);
+        assertEquals(mockAddBook, itemDao.findById(mockAddBook.getId()));
 
         // Clean up
         itemDao.delete(mockAddBook);
@@ -91,4 +90,15 @@ public class ManagerTests {
 
         assertEquals(itemDao.findById(mockAddBook.getId()).getName(), mockEditBook.getName());
     } */
+    @Test
+    public void testDeleteBook() {
+        // There is mockBook already in database
+        var bookId = mockBook.getId().intValue();
+        assertEquals(mockBook, itemDao.findById(bookId));
+
+        // Remove book and check that there is is none
+        managerController.removeBook(bookId);
+        assertEquals(null, itemDao.findById(bookId));
+    }
+
 }
