@@ -1,5 +1,6 @@
 package LC.PrenotationApp;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.AfterEach;
@@ -57,6 +58,13 @@ public class ManagerTests {
         userDao.delete(mockManager);
 		itemDao.delete(mockBook);
 		SecurityContextHolder.getContext().setAuthentication(null);
+	}
+
+    @Test
+	void contextLoads() {
+		assertThat(userDao).isNotNull();
+		assertThat(itemDao).isNotNull();
+		assertThat(reservationDao).isNotNull();
 	}
 
     @Test
