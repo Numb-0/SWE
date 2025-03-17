@@ -43,8 +43,8 @@ public class StaffController {
         return "staff-dashboard";
     }
 
-    @DeleteMapping("dashboard-close-reservation/{id}")
-    public String closeReservation(@PathVariable long id) throws ChangeSetPersister.NotFoundException {
+    @PostMapping("dashboard-close-reservation/{id}")
+    public String closeReservation(@PathVariable("id") long id) throws ChangeSetPersister.NotFoundException {
         reservationConfirmService.closeReservation(reservationConfirmService.getReservationById(id));
         return "staff-dashboard";
     }

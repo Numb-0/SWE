@@ -16,7 +16,9 @@ public class ReservationConfirmService {
     private ReservationDao reservationDao;
 
     public List<Reservation> getReservations(User user) {
-        return reservationDao.findByUser(user);
+        List<Reservation> reservations = reservationDao.findByUser(user);
+        reservations.removeIf(r -> !r.getActive() && r.getExpired());
+        return reservations;
     }
 
     public Reservation getReservationById(long id) throws ChangeSetPersister.NotFoundException {
@@ -37,6 +39,8 @@ public class ReservationConfirmService {
     public void closeReservation(Reservation reservation) {
         if (reservation.getExpired()) {
             reservation.closeReservation();
+            reservationDao.save(reservation);
         }
+
     }
 }
